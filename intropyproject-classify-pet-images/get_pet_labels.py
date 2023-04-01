@@ -52,4 +52,4 @@ def get_pet_labels(image_dir):
     return results_dic
 
 
-get_pet_labels("intropyproject-classify-pet-images\pet_images")
+#get_pet_labels("intropyproject-classify-pet-images\pet_images")
