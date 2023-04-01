@@ -42,4 +42,14 @@ def get_pet_labels(image_dir):
     """
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+    results_dic = {}
+    for file in listdir(image_dir):
+      dog_value = [file[:file.rfind("_")].strip().lower().replace("_", " ")]
+      results_dic[file] = dog_value
+    #example: results_dic = {'Boston_terrier_02259.jpg':'boston terrier'}
+    """ for k in results_dic:
+       print(k, results_dic[k]) """
+    return results_dic
+
+
+get_pet_labels("intropyproject-classify-pet-images\pet_images")
