@@ -65,4 +65,19 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    # Process all files in the results_dic - use images_dir to give fullpath
+    # that indicates the folder and the filename (key) to be used in the 
+    # classifier function
+    for key in results_dic:
+       model_label = classifier(images_dir + "\\" + key, model).lower().strip()
+       # defines truth as pet image label 
+       truth = results_dic[key][0]
+
+       if truth in model_label:
+           results_dic[key].extend((model_label,'1'))
+       else:
+           results_dic[key].extend((model_label,'0'))
+    print("classify_images : results_dic => ", list(results_dic.items())[0][0], ":", list(results_dic.items())[0][1])   
+    """ print(results_dic["fox_squirrel_01.jpg"])
+    print(results_dic["German_sherpherd_dog_04890.jpg"])
+ """

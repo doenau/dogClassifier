@@ -47,8 +47,11 @@ def get_pet_labels(image_dir):
       dog_value = [file[:file.rfind("_")].strip().lower().replace("_", " ")]
       results_dic[file] = dog_value
     #example: results_dic = {'Boston_terrier_02259.jpg':'boston terrier'}
-    """ for k in results_dic:
-       print(k, results_dic[k]) """
+    #for k in results_dic:
+    #   print(k, results_dic[k])
+    #print(len(results_dic))
+    #print("get_pet_labels : results_dic => ", list(results_dic.items())[13][0], ":", list(results_dic.items())[13][1])
+    #print(results_dic)
     return results_dic
 
 

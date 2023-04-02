@@ -66,5 +66,35 @@ def adjust_results4_isadog(results_dic, dogfile):
                maltese) (string - indicates text file's filename)
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """           
-    None
+    """ 
+    dognames_dic = {}
+    with open(dogfile, 'r') as f:
+      file_data = f.readlines()
+    for line in file_data:
+        #print("line = ", line)
+        line = line.rstrip()
+        if line not in dognames_dic:
+           dognames_dic[line.rstrip()] = 0
+        else:
+           print(str.format("WARNING: dogname {} is already included", line))
+    # Example dognames_dic
+    # {'chihuahua': 0, 'japanese spaniel': 0, 'maltese dog, maltese terrier, maltese': 0, .......}
+
+    print("adjust_results : results_dic => ", list(results_dic.items())[13][0], ":", list(results_dic.items())[13][1])
+    # Example results_dic...
+    # {'Beagle_01141.jpg': ['beagle',    'walker hound, walker foxhound', 0,            1,                  1                   ]}
+    # {image_filename    : [image label, classifier label,                labels match, image label is dog, class label is dog  ]}
+    for animal in results_dic:
+      if results_dic[animal][0] in dognames_dic:
+         results_dic[animal].extend('1')
+      else:
+         results_dic[animal].extend('0')
+      if results_dic[animal][1] in dognames_dic:
+         results_dic[animal].extend('1')
+      else:
+         results_dic[animal].extend('0')
+      print(animal, results_dic[animal])
+        
+    """ for k in dognames_dic:
+       print(str.format("{}:{}", k, dognames_dic[k])) """
+    #print("# of dognames: ",len(dognames_dic))
