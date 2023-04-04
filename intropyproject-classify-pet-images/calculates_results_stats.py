@@ -70,58 +70,52 @@ def calculates_results_stats(results_dic):
     """        
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
+        
+    results_stats_dic = dict()
     
-    # Print the names of the columns.
-    print("{:<40} {:<30} {:<10} {:<10} {:<10} ".format('File', 'Label', 'mL', 'isDog', 'classIsDog'))
-    # print each data item.
+    results_stats_dic['n_images'] = len(results_dic)    # Z
+    results_stats_dic['n_dogs_img'] = 0                 # B
+    results_stats_dic['n_match'] = 0                    # Y
+    results_stats_dic['n_correct_dogs'] = 0             # A
+    results_stats_dic['n_correct_notdogs'] = 0          # C
+    results_stats_dic['n_correct_breed'] = 0            # E
+    results_stats_dic['n_notdogs_img'] = \
+        results_stats_dic['n_images'] - results_stats_dic['n_dogs_img'] #D
     
-    for key, value in results_dic.items():
-        label, classify, mL, isDog, classIsDog = value
-        print("{:<40} {:<30} {:<10} {:<10} {:<10}".format(key, label, mL, isDog, classIsDog))
-    n_images = len(results_dic) # number of images
-    n_correct_dogs = 0          # number of correct dog matches
-    n_correct_not_dogs = 0      # no of correct non-dog matches
-    n_dog_images = 0            # pet label is a dog
-    n_not_dog_images = 0        # both labels are not dog
-    n_correct_breed = 0         # correct breed match
-    n_label_matches = 0         # labels match
-
     for key in results_dic:
-        #print(results_dic[key])
-        #print(results_dic[key][3], " & ", results_dic[key][4])
-        if int(results_dic[key][3]) == 1 and int(results_dic[key][4]) == 1:
-            n_correct_dogs += 1
-        if int(results_dic[key][3]) == 0 and int(results_dic[key][4]) == 0:
-            n_correct_not_dogs += 1
-        if int(results_dic[key][3]) == 1:
-            n_dog_images += 1 
-        else:
-            n_not_dog_images += 1
-        if int(results_dic[key][3]) == 1 and int(results_dic[key][2]) == 1:
-            n_correct_breed += 1
-        if int(results_dic[key][2]) == 1:
-            n_label_matches += 1
-    
-    if n_dog_images > 0 and n_correct_dogs > 0:
-        pc_correct_dogs = n_correct_dogs / n_dog_images * 100
-        #print(pc_correct_dogs)
-    else:
-        pc_correct_dogs = 0.0
-    if n_not_dog_images > 0:
-        pc_correct_not_dogs = n_correct_not_dogs / n_not_dog_images * 100
-        #print(pc_correct_not_dogs)
-    #print(n_correct_breed, " / ", n_dog_images)
-    if n_dog_images > 0:
-        pc_correct_breeds = n_correct_breed / n_dog_images * 100 
-    else:
-        pc_correct_breeds = 0.0
-    #print(pc_correct_breeds)
-    pc_label_matches = n_label_matches / n_images * 100
-    #print(pc_label_matches)
-    results_stats_dic = { 'n_images' : n_images, 'n_correct_dogs' : n_correct_dogs, 'n_correct_not_dogs' : n_correct_not_dogs,\
-                          'n_dog_images' : n_dog_images, 'n_not_dog_images' : n_not_dog_images, 'n_correct_breed' : n_correct_breed, \
-                            'n_label_matches' : n_label_matches ,'pc_label_matches' : pc_label_matches, 'pc_correct_dogs':pc_correct_dogs,\
-                                 'pc_correct_not_dogs':pc_correct_not_dogs, 'pc_correct_breeds':pc_correct_breeds }
-    for val in results_stats_dic.values():
-        print(type(val))
+        # A
+        if results_dic[key][3] == 1 and results_dic[key][4] == 1:
+            results_stats_dic['n_correct_dogs'] += 1
+        # B
+        if results_dic[key][3] == 1 :
+            results_stats_dic['n_dogs_img'] += 1
+        # C
+        if results_dic[key][3] == 0 and results_dic[key][4] == 0:
+            results_stats_dic['n_correct_notdogs'] += 1
+        
+            results_stats_dic['n_images'] - results_stats_dic['n_dogs_img']  
+        # D - done separately above
+        # E
+        if results_dic[key][3] == 1 and results_dic[key][2] == 1:
+            results_stats_dic['n_correct_breed'] += 1
+        # Y
+        if results_dic[key][2] == 1:
+            results_stats_dic['n_match'] += 1
+
+    print(results_stats_dic)
+    #######################################################
+    # Obj 1a.... A/B*100
+    pct_correct_dogs = results_stats_dic['n_correct_dogs'] / results_stats_dic['n_dogs_img'] * 100
+    # Obj 1b.... C/D*100
+    if (results_stats_dic['n_notdogs_img'] > 0):
+        pct_correct_notdogs = results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img'] * 100
+    # Obj 2..... E/B*100
+    pct_correct_breed = results_stats_dic['n_correct_breed'] / results_stats_dic['n_dogs_img'] * 100
+    # Obj Opt .. Y/Z*100
+    pct_label_matches = results_stats_dic['n_match'] / results_stats_dic['n_images'] * 100
+    #######################################################
+    results_stats_dic['pct_correct_dogs'] = pct_correct_dogs
+    results_stats_dic['pct_correct_notdogs'] = pct_correct_notdogs
+    results_stats_dic['pct_correct_breed'] = pct_correct_breed
+    results_stats_dic['pct_label_matches'] = pct_label_matches
     return results_stats_dic
