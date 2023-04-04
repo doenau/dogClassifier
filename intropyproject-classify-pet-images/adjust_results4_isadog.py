@@ -86,13 +86,13 @@ def adjust_results4_isadog(results_dic, dogfile):
     # {image_filename    : [image label, classifier label,                labels match, image label is dog, class label is dog  ]}
     for animal in results_dic:
       if results_dic[animal][0] in dognames_dic:
-         results_dic[animal].extend('1')
+         results_dic[animal].append(1)
       else:
-         results_dic[animal].extend('0')
+         results_dic[animal].append(0)
       if results_dic[animal][1] in dognames_dic:
-         results_dic[animal].extend('1')
+         results_dic[animal].append(1)
       else:
-         results_dic[animal].extend('0')
+         results_dic[animal].append(0)
       #print(animal, results_dic[animal])
         
     """ for k in dognames_dic:
