@@ -70,4 +70,58 @@ def calculates_results_stats(results_dic):
     """        
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+    
+    # Print the names of the columns.
+    print("{:<40} {:<30} {:<10} {:<10} {:<10} ".format('File', 'Label', 'mL', 'isDog', 'classIsDog'))
+    # print each data item.
+    
+    for key, value in results_dic.items():
+        label, classify, mL, isDog, classIsDog = value
+        print("{:<40} {:<30} {:<10} {:<10} {:<10}".format(key, label, mL, isDog, classIsDog))
+    n_images = len(results_dic) # number of images
+    n_correct_dogs = 0          # number of correct dog matches
+    n_correct_not_dogs = 0      # no of correct non-dog matches
+    n_dog_images = 0            # pet label is a dog
+    n_not_dog_images = 0        # both labels are not dog
+    n_correct_breed = 0         # correct breed match
+    n_label_matches = 0         # labels match
+
+    for key in results_dic:
+        #print(results_dic[key])
+        #print(results_dic[key][3], " & ", results_dic[key][4])
+        if int(results_dic[key][3]) == 1 and int(results_dic[key][4]) == 1:
+            n_correct_dogs += 1
+        if int(results_dic[key][3]) == 0 and int(results_dic[key][4]) == 0:
+            n_correct_not_dogs += 1
+        if int(results_dic[key][3]) == 1:
+            n_dog_images += 1 
+        else:
+            n_not_dog_images += 1
+        if int(results_dic[key][3]) == 1 and int(results_dic[key][2]) == 1:
+            n_correct_breed += 1
+        if int(results_dic[key][2]) == 1:
+            n_label_matches += 1
+    
+    if n_dog_images > 0 and n_correct_dogs > 0:
+        pc_correct_dogs = n_correct_dogs / n_dog_images * 100
+        #print(pc_correct_dogs)
+    else:
+        pc_correct_dogs = 0.0
+    if n_not_dog_images > 0:
+        pc_correct_not_dogs = n_correct_not_dogs / n_not_dog_images * 100
+        #print(pc_correct_not_dogs)
+    #print(n_correct_breed, " / ", n_dog_images)
+    if n_dog_images > 0:
+        pc_correct_breeds = n_correct_breed / n_dog_images * 100 
+    else:
+        pc_correct_breeds = 0.0
+    #print(pc_correct_breeds)
+    pc_label_matches = n_label_matches / n_images * 100
+    #print(pc_label_matches)
+    results_stats_dic = { 'n_images' : n_images, 'n_correct_dogs' : n_correct_dogs, 'n_correct_not_dogs' : n_correct_not_dogs,\
+                          'n_dog_images' : n_dog_images, 'n_not_dog_images' : n_not_dog_images, 'n_correct_breed' : n_correct_breed, \
+                            'n_label_matches' : n_label_matches ,'pc_label_matches' : pc_label_matches, 'pc_correct_dogs':pc_correct_dogs,\
+                                 'pc_correct_not_dogs':pc_correct_not_dogs, 'pc_correct_breeds':pc_correct_breeds }
+    for val in results_stats_dic.values():
+        print(type(val))
+    return results_stats_dic

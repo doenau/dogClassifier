@@ -80,7 +80,7 @@ def adjust_results4_isadog(results_dic, dogfile):
     # Example dognames_dic
     # {'chihuahua': 0, 'japanese spaniel': 0, 'maltese dog, maltese terrier, maltese': 0, .......}
 
-    print("adjust_results : results_dic => ", list(results_dic.items())[13][0], ":", list(results_dic.items())[13][1])
+    #print("adjust_results : results_dic => ", list(results_dic.items())[13][0], ":", list(results_dic.items())[13][1])
     # Example results_dic...
     # {'Beagle_01141.jpg': ['beagle',    'walker hound, walker foxhound', 0,            1,                  1                   ]}
     # {image_filename    : [image label, classifier label,                labels match, image label is dog, class label is dog  ]}
@@ -93,7 +93,7 @@ def adjust_results4_isadog(results_dic, dogfile):
          results_dic[animal].extend('1')
       else:
          results_dic[animal].extend('0')
-      print(animal, results_dic[animal])
+      #print(animal, results_dic[animal])
         
     """ for k in dognames_dic:
        print(str.format("{}:{}", k, dognames_dic[k])) """

@@ -77,7 +77,7 @@ def classify_images(images_dir, results_dic, model):
            results_dic[key].extend((model_label,'1'))
        else:
            results_dic[key].extend((model_label,'0'))
-    print("classify_images : results_dic => ", list(results_dic.items())[0][0], ":", list(results_dic.items())[0][1])   
+    #print("classify_images : results_dic => ", list(results_dic.items())[0][0], ":", list(results_dic.items())[0][1])   
     """ print(results_dic["fox_squirrel_01.jpg"])
     print(results_dic["German_sherpherd_dog_04890.jpg"])
  """
