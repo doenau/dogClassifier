@@ -79,8 +79,7 @@ def calculates_results_stats(results_dic):
     results_stats_dic['n_correct_dogs'] = 0             # A
     results_stats_dic['n_correct_notdogs'] = 0          # C
     results_stats_dic['n_correct_breed'] = 0            # E
-    results_stats_dic['n_notdogs_img'] = \
-    results_stats_dic['n_images'] - results_stats_dic['n_dogs_img'] #D
+    
     
     for key in results_dic:
         # A
@@ -94,7 +93,7 @@ def calculates_results_stats(results_dic):
             results_stats_dic['n_correct_notdogs'] += 1
         
             results_stats_dic['n_images'] - results_stats_dic['n_dogs_img']  
-        # D - done separately above
+        # D - done separately below
         # E
         if results_dic[key][3] == 1 and results_dic[key][2] == 1:
             results_stats_dic['n_correct_breed'] += 1
@@ -102,6 +101,7 @@ def calculates_results_stats(results_dic):
         if results_dic[key][2] == 1:
             results_stats_dic['n_match'] += 1
 
+    results_stats_dic['n_notdogs_img'] = results_stats_dic['n_images'] - results_stats_dic['n_dogs_img'] #D
     #######################################################
     # Obj 1a.... A/B*100
     if results_stats_dic['n_dogs_img'] > 0:
