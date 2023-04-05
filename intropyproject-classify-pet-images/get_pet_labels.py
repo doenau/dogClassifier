@@ -43,8 +43,10 @@ def get_pet_labels(image_dir):
     # Replace None with the results_dic dictionary that you created with this
     # function
     results_dic = {}
+    #corrected - ignore hidden files (starts with ".")
     for file in listdir(image_dir):
-      dog_value = [file[:file.rfind("_")].strip().lower().replace("_", " ")]
+      if not file.startswith('.'):
+        dog_value = [file[:file.rfind("_")].strip().lower().replace("_", " ")]
       results_dic[file] = dog_value
     #example: results_dic = {'Boston_terrier_02259.jpg':'boston terrier'}
     #for k in results_dic:

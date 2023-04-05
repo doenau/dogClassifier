@@ -73,4 +73,4 @@ INCORRECT Dog Breed Assignment:
 Real:                        dog   Classifier:                  border collie
 Real:                        dog   Classifier:                         collie
 
-** Total Elapsed Runtime: 0:0:1
+** Total Elapsed Runtime: 0:0:0
