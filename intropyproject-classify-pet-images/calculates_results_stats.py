@@ -123,5 +123,5 @@ def calculates_results_stats(results_dic):
          results_stats_dic['pct_match'] = results_stats_dic['n_match'] / results_stats_dic['n_images'] * 100
     else:
          results_stats_dic['pct_match'] = 0
-    print(results_stats_dic)
+    #print(results_stats_dic)
     return results_stats_dic

@@ -1,0 +1,34 @@
+Questions regarding Uploaded Image Classification:
+
+1. Did the three model architectures classify the breed of dog in Dog_01.jpg to be the same breed? If not, report the differences in the classifications.
+
+Answer: 
+No.
+Alexnet classified the images as an incorrect breed, and was the same for both images
+VGG classified the images as an incorrect breed, and was different for both images
+Resnet classified the images as an incorrect breed, and was different for both images, but the two breeds were more similar than those in the VGG results.
+From this perspective, Alexnet was most accurate, VGG was least accurate
+
+2. Did each of the three model architectures classify the breed of dog in Dog_01.jpg to be the same breed of dog as that model architecture classified Dog_02.jpg? If not, report the differences in the classifications.
+
+Answer: 
+No. 
+VGG was least accurate, classifying both images incorrectly and as different breeds.
+Alexnet classified both images as the same breed, though it was incorrect.
+Resnet classified both images as similar breeds, though still incorrect.
+
+
+3. Did the three model architectures correctly classify Animal_Name_01.jpg and Object_Name_01.jpg to not be dogs? If not, report the misclassifications.
+
+Answer: 
+All architectures correctly classified the animal correctly as a macaque, not as any type of dog.
+All architectures correctly classified the objects as not being a dog, however the final classifier was incorrect for all three architectures (envelope, screen, television, instead of TABLE) - perhaps due to the image provided.
+
+
+4. Based upon your answers for questions 1. - 3. above, select the model architecture that you feel did the best at classifying the four uploaded images. Describe why you selected that model architecture as the best on uploaded image classification.
+
+Answer:
+With the images provided, Alexnet provided the best results.
+For the dog images, it was the only architecture to produce the same result for both images.
+For the animal image, all architectures had the same result.
+For the object image, all architectures had different and incorrect classifications. Because of this, more examples would be needed for this classification to impact the answer to this question.
